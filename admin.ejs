@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html>
+  <head><title>Admin Panel</title></head>
+  <body>
+    <h1>Admin Panel</h1>
+    <table border="1">
+      <tr><th>ID</th><th>Uživatel</th><th>Admin</th><th>Reset hesla</th><th>Přidat jako admin</th></tr>
+      <% users.forEach(u => { %>
+        <tr>
+          <td><%= u.id %></td>
+          <td><%= u.username %></td>
+          <td><%= u.isAdmin ? 'Ano' : 'Ne' %></td>
+          <td>
+            <% if (u.id !== 1) { %>
+              <form method="POST" action="/admin/reset">
+                <input type="hidden" name="userId" value="<%= u.id %>" />
+                <input type="text" name="newPassword" placeholder="Nové heslo" required />
+                <button type="submit">Reset</button>
+              </form>
+            <% } else { %>Nedostupné<% } %>
+          </td>
+          <td>
+            <% if (!u.isAdmin && u.id !== 1) { %>
+              <form method="POST" action="/admin/add-admin">
+                <input type="hidden" name="userId" value="<%= u.id %>" />
+                <button type="submit">Přidat</button>
+              </form>
+            <% } else { %>-<% } %>
+          </td>
+        </tr>
+      <% }) %>
+    </table>
+    <a href="/logout">Odhlásit se</a>
+  </body>
+</html>

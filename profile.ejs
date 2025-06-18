@@ -1,0 +1,13 @@
+
+<!DOCTYPE html>
+<html>
+  <head><title>Profil</title></head>
+  <body>
+    <h1>Profil: <%= user.username %></h1>
+    <form method="POST" action="/profile/password">
+      <input name="newPassword" type="password" placeholder="Nové heslo" required />
+      <button type="submit">Změnit heslo</button>
+    </form>
+    <a href="/logout">Odhlásit se</a>
+  </body>
+</html>
